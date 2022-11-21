@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnIn;
     private EditText login;
     private EditText password;
     private TextView error;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnIn = findViewById(R.id.button);
+        Button btnIn = findViewById(R.id.button);
         btnIn.setOnClickListener(this);
         login = findViewById(R.id.editTextTextEmailAddress);
         password = findViewById(R.id.editTextTextPassword);
@@ -35,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view.getId() == R.id.button){
             Pattern email = Pattern.compile("[a-zA-Z0-9]{1,}@[a-zA-Z]{1,10}\\.[a-zA-Z]{1,5}");
-            Matcher matcher = email.matcher((CharSequence) login);
+            Matcher matcher = email.matcher(login.getText());
             Pattern passwordP = Pattern.compile("[a-zA-Z0-9]{8,15}");
-            Matcher matcher2 = passwordP.matcher((CharSequence) password);
+            Matcher matcher2 = passwordP.matcher(password.getText());
             if (matcher.matches() && matcher2.matches()) {
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                intent.putExtra(KEY, "Hello "+ login + "!");
+                intent.putExtra(KEY, "Hello "+ login.getText() + "!");
                 startActivity(intent);
             }
             else{
